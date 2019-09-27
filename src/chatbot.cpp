@@ -30,6 +30,7 @@ ChatBot::ChatBot(std::string filename)
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
 
+
 ChatBot::~ChatBot()
 {
     std::cout << "ChatBot Destructor" << std::endl;
@@ -44,7 +45,43 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+//member for member , shallow swap
+void swap(ChatBot& first, ChatBot& second){
+	using std::swap;
+	swap(first._image, second._image);
+	swap(first._currentNode, second._currentNode);
+	swap(first._rootNode, second._rootNode);
+	swap(first._chatLogic, second._chatLogic);
+}
 
+//copy constructor
+ChatBot::ChatBot(const ChatBot& other){
+	std::cout << "ChatBot Copy Constructor" << std::endl;
+	_image = new wxBitmap(*other._image);
+	_currentNode = other._currentNode;
+	_rootNode = other._rootNode;
+	_chatLogic = other._chatLogic;
+};
+
+//copy assignment operator, use copy and swap idom, pass by value so that the copy can be done by parameter passing
+ChatBot& ChatBot::operator=(ChatBot other){
+	std::cout << "ChatBot Copy Assignment" << std::endl;
+	swap(*this, other);
+	return *this;
+}
+
+//move constructor
+ChatBot::ChatBot(ChatBot&& other):ChatBot(){
+	std::cout << "ChatBot Move Constructor" << std::endl;
+	swap(*this, other);
+}
+
+//move assignment operator
+ChatBot& ChatBot::operator=(ChatBot&& other){
+	std::cout << "ChatBot Move Assignment Operator" << std::endl;
+	swap(*this,other);
+	return *this;
+}
 ////
 //// EOF STUDENT CODE
 

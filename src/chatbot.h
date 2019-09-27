@@ -29,7 +29,18 @@ public:
 
     //// STUDENT CODE
     ////
+    //copy constructor
+    friend void swap(ChatBot& first, ChatBot& second);
+    ChatBot(const ChatBot& other);
 
+    //copy assignment operator, use copy and swap idom, pass by value so that the copy can be done by parameter passing
+    ChatBot& operator=(ChatBot other);
+
+    //move constructor
+    ChatBot(ChatBot&& other);
+
+    //move assignment operator
+    ChatBot& operator=(ChatBot&& other);
     ////
     //// EOF STUDENT CODE
 

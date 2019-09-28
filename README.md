@@ -14,7 +14,7 @@ Initial project codes have been modified as required to meet project rubric. Bel
 
 ### `GraphNode` ownership is not transferred
 
-GraphNode instance is  exclusvisely in the form of `unique_ptr`. When passing it in function like `std::find_if`, refence is used, something like below,
+GraphNode instance is  exclusvisely owned by `ChatLogic` in the form of `unique_ptr`. When passing it in function like `std::find_if`, refence is used, something like below,
 
 ```
 auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(parentToken->second); });
@@ -35,10 +35,10 @@ std::vector<std::unique_ptr<GraphEdge>> _childEdges;  // edges to subsequent nod
 std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
 ```
 
-An alternative approach is to use a combination of `shared_ptr` and `weak_ptr`, it has two disadvantage.
+An alternative approach is to use a combination of `shared_ptr` and `weak_ptr`, but it has two disadvantage.
 
 1. The concept of exclusive ownership for outgoing edges are weakend.
-2. Code changes will be much more complicated.
+2. Code changes will be much more complicated, and are spread in more files.
 
 ## The Rule Of Five
 
@@ -137,10 +137,10 @@ ChatBot Destructor
 
 Under the hood, here is what happens.
 
-1. creat an empty Chatbot instance on the root node,  `rootNode->_chatBot.reset(new ChatBot());`
+1. Create an empty Chatbot instance on the root node,  `rootNode->_chatBot.reset(new ChatBot());`  
 This outputs `ChatBot Constructor`
-2. Call `MoveChatbotHere`, `rootNode->MoveChatbotHere(std::move(chatbot_temp))`
-This outputs `ChatBot Move Constructor3.`
+2. Call `MoveChatbotHere`, `rootNode->MoveChatbotHere(std::move(chatbot_temp))`  
+This outputs `ChatBot Move Constructor3.`  
 `MoveChatbotHere` is as below
 ```
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
@@ -151,13 +151,13 @@ void GraphNode::MoveChatbotHere(ChatBot chatbot)
 
 }
 ```
-3. move the temporary ChatBot instance to the root node, with above line `*_chatBot = std::move(chatbot);`
+3. Move the temporary ChatBot instance to the root node, with above line `*_chatBot = std::move(chatbot);`  
 This outputs ChatBot Move Assignment Operator
 
-4. The temporary Chatbot instance deallocate
+4. The temporary Chatbot instance deallocate  
 This outputs `ChatBot Destructor`
 
-5. the local stack Chatbot instance deallocate
+5. the local stack Chatbot instance deallocate  
 
 This outputs `ChatBot Destructor`
 
@@ -166,7 +166,7 @@ This outputs `ChatBot Destructor`
 ### `_ChatLogic` holds non-owning references to `Chatbot`
 
 ChatLogic has no ownership relation to the ChatBot instance and thus is no longer responsible for memory allocation and deallocation.
-Every time the chatbot instance move to a new node, we would update `ChatLogic` refernce for chatbot.This is implemented in `GraphNode`
+Each time the chatbot instance move to a new node, we would update chatbot refence for the Chatlogic.This is implemented in `GraphNode`, the line `_chatBot->_chatLogic->SetChatbotHandle(_chatBot.get());`.  
 
 ```
 void GraphNode::MoveChatbotHere(ChatBot chatbot)

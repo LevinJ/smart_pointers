@@ -166,7 +166,7 @@ This outputs `ChatBot Destructor`
 ### `_ChatLogic` holds non-owning references to `Chatbot`
 
 ChatLogic has no ownership relation to the ChatBot instance and thus is no longer responsible for memory allocation and deallocation.
-Each time the chatbot instance move to a new node, we would update chatbot refence for the Chatlogic.This is implemented in `GraphNode`, the line `_chatBot->_chatLogic->SetChatbotHandle(_chatBot.get());`.  
+Each time the chatbot instance move to a new node, we would update chatbot refence for the Chatlogic.This is implemented in `GraphNode`, with the line `_chatBot->_chatLogic->SetChatbotHandle(_chatBot.get());`.  
 
 ```
 void GraphNode::MoveChatbotHere(ChatBot chatbot)

@@ -152,12 +152,12 @@ void GraphNode::MoveChatbotHere(ChatBot chatbot)
 }
 ```
 3. Move the temporary ChatBot instance to the root node, with above line `*_chatBot = std::move(chatbot);`  
-This outputs ChatBot Move Assignment Operator
+This outputs `ChatBot Move Assignment Operator`
 
 4. The temporary Chatbot instance deallocate  
 This outputs `ChatBot Destructor`
 
-5. the local stack Chatbot instance deallocate  
+5. The local stack Chatbot instance deallocate  
 
 This outputs `ChatBot Destructor`
 

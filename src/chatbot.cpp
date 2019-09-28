@@ -12,6 +12,7 @@
 ChatBot::ChatBot()
 {
     // invalidate data handles
+	  std::cout << "ChatBot Constructor" << std::endl;
     _image = nullptr;
     _chatLogic = nullptr;
     _rootNode = nullptr;
@@ -64,15 +65,20 @@ ChatBot::ChatBot(const ChatBot& other){
 };
 
 //copy assignment operator, use copy and swap idom, pass by value so that the copy can be done by parameter passing
-ChatBot& ChatBot::operator=(ChatBot other){
+ChatBot& ChatBot::operator=(const ChatBot& other){
 	std::cout << "ChatBot Copy Assignment" << std::endl;
-	swap(*this, other);
+	ChatBot copy(other);
+	swap(*this, copy);
 	return *this;
 }
 
 //move constructor
-ChatBot::ChatBot(ChatBot&& other):ChatBot(){
+//ChatBot::ChatBot(ChatBot&& other):ChatBot(){
+ChatBot::ChatBot(ChatBot&& other){
 	std::cout << "ChatBot Move Constructor" << std::endl;
+	 _image = nullptr;
+	_chatLogic = nullptr;
+	_rootNode = nullptr;
 	swap(*this, other);
 }
 

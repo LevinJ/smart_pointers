@@ -64,7 +64,7 @@ ChatBot::ChatBot(const ChatBot& other){
 	_chatLogic = other._chatLogic;
 };
 
-//copy assignment operator, use copy and swap idom, pass by value so that the copy can be done by parameter passing
+//copy assignment operator, use copy and swap idom
 ChatBot& ChatBot::operator=(const ChatBot& other){
 	std::cout << "ChatBot Copy Assignment" << std::endl;
 	ChatBot copy(other);

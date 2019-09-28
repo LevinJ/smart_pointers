@@ -34,7 +34,7 @@ public:
     friend void swap(ChatBot& first, ChatBot& second);
     ChatBot(const ChatBot& other);
 
-    //copy assignment operator, use copy and swap idom, pass by value so that the copy can be done by parameter passing
+    //copy assignment operator, use copy and swap idom
     ChatBot& operator=(const ChatBot& other);
 
     //move constructor

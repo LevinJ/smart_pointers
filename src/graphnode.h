@@ -31,7 +31,7 @@ private:
     std::vector<std::string> _answers;
 
 public:
-    std::unique_ptr<ChatBot> _chatBot;
+    ChatBot _chatBot;
     // constructor / destructor
     GraphNode(int id);
     ~GraphNode();

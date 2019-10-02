@@ -16,13 +16,12 @@ private:
     // data handles (not owned)
     GraphNode *_currentNode;
     GraphNode *_rootNode;
-
+    ChatLogic *_chatLogic;
 
     // proprietary functions
     int ComputeLevenshteinDistance(std::string s1, std::string s2);
 
 public:
-    ChatLogic *_chatLogic;
     // constructors / destructors
     ChatBot();                     // constructor WITHOUT memory allocation
     ChatBot(std::string filename); // constructor WITH memory allocation
@@ -31,7 +30,6 @@ public:
     //// STUDENT CODE
     ////
     //copy constructor
-    friend void swap(ChatBot& first, ChatBot& second);
     ChatBot(const ChatBot& other);
 
     //copy assignment operator, use copy and swap idom

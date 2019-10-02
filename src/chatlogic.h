@@ -20,7 +20,7 @@ private:
     std::vector<std::unique_ptr<GraphNode>> _nodes;
 
     //data handles (not owned)
-    std::vector<GraphEdge *> _edges;
+//    std::vector<GraphEdge *> _edges;
 
     ////
     //// EOF STUDENT CODE

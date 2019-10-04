@@ -32,7 +32,7 @@ public:
     //copy constructor
     ChatBot(const ChatBot& other);
 
-    //copy assignment operator, use copy and swap idom
+    //copy assignment operator
     ChatBot& operator=(const ChatBot& other);
 
     //move constructor

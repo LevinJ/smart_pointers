@@ -29,9 +29,9 @@ private:
     // proprietary members
     int _id;
     std::vector<std::string> _answers;
+    ChatBot _chatBot;
 
 public:
-    ChatBot _chatBot;
     // constructor / destructor
     GraphNode(int id);
     ~GraphNode();

@@ -58,9 +58,8 @@ ChatBot& ChatBot::operator=(const ChatBot& source){
 	std::cout << "ChatBot Copy Assignment" << std::endl;
 	if (this != &source){
 		//delete old resources before copying
-		if(_image != NULL){
+		if(_image){
 			delete _image;
-			_image = NULL;
 		}
 		_image = new wxBitmap(*source._image);
 		_rootNode = source._rootNode;
@@ -76,7 +75,7 @@ ChatBot::ChatBot(ChatBot&& source){
 	_image = source._image;
 	_rootNode = source._rootNode;
 	_chatLogic = source._chatLogic;
-	source._image = NULL;
+	source._image = nullptr;
 	source._rootNode = nullptr;
 	source._chatLogic = nullptr;
 	//update _chatLogic pointer to chatbot
@@ -89,16 +88,15 @@ ChatBot& ChatBot::operator=(ChatBot&& source){
 	std::cout << "ChatBot Move Assignment Operator" << std::endl;
 	if (this != &source){
 		//delete old resources before moving
-		if(_image != NULL){
+		if(_image){
 			//this step is for pedagogical purpose, as we know for sure, in this project,
 			// _image variable is expected to be NULL at this point.
 			delete _image;
-			_image = NULL;
 		}
 		_image = source._image;
 		_rootNode = source._rootNode;
 		_chatLogic = source._chatLogic;
-		source._image = NULL;
+		source._image = nullptr;
 		source._rootNode = nullptr;
 		source._chatLogic = nullptr;
 		//update _chatLogic pointer to chatbot
